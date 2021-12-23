@@ -1,6 +1,9 @@
 package main
 
-import "github.com/gofiber/fiber/v2"
+import (
+	"github.com/gofiber/fiber/v2"
+	"os"
+)
 
 func main() {
 	app := fiber.New() // create a new Fiber instance
@@ -10,6 +13,10 @@ func main() {
 		return c.SendString("Hello, World!") // send text
 	})
 
-	// Start server on port 3000
-	app.Listen(":3000")
+	port := os.Getenv("PORT")
+	if port == "" {
+		app.Listen(":4000")
+	} else {
+		app.Listen(":" + port)
+	}
 }
