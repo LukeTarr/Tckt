@@ -1,6 +1,7 @@
 const Tickets = () => {
     return(
         <>
+        <h1>Landing</h1>
         </>
     );
 }
