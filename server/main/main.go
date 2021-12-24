@@ -13,10 +13,17 @@ func main() {
 		return c.SendString("Hello, World!") // send text
 	})
 
+	// Look for $PORT (env var for Heroku) to listen on or use 4000 for local dev
 	port := os.Getenv("PORT")
 	if port == "" {
-		app.Listen(":4000")
+		err := app.Listen(":4000")
+		if err != nil {
+			return
+		}
 	} else {
-		app.Listen(":" + port)
+		err := app.Listen(":" + port)
+		if err != nil {
+			return
+		}
 	}
 }

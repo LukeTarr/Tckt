@@ -1,4 +1,4 @@
-module Tckt
+module github.com/LukeTarr/Tckt
 
 go 1.17
 
