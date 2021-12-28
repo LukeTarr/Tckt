@@ -1,29 +1,50 @@
 package main
 
 import (
+	"fmt"
 	"github.com/gofiber/fiber/v2"
 	"os"
+
+	"github.com/joho/godotenv"
+	"gorm.io/driver/postgres"
+	"gorm.io/gorm"
 )
 
 func main() {
-	app := fiber.New() // create a new Fiber instance
-
-	// Create a new endpoint
-	app.Get("/", func(c *fiber.Ctx) error {
-		return c.SendString("Hello, World!") // send text
-	})
-
-	// Look for $PORT (env var for Heroku) to listen on or use 4000 for local dev
+	// set production mode to false until we collect env vars
+	prod := false
 	port := os.Getenv("PORT")
-	if port == "" {
-		err := app.Listen(":4000")
+	// if we have $PORT set, we can assume we're in production
+	if port != "" {
+		prod = true
+	}
+
+	// if dev, load our env from .env
+	if !prod {
+		err := godotenv.Load(".env")
 		if err != nil {
-			return
+			panic("Missing .env file!")
 		}
+	}
+
+	// Grab the Database credentials from env var
+	dsn := os.Getenv("DATABASE_URL")
+
+	// Connect to the database with our credentials
+	db, err := gorm.Open(postgres.Open(dsn), &gorm.Config{})
+
+	if err != nil {
+		panic("Couldn't connect to DB!")
+	}
+
+	fmt.Println(db)
+
+	// create a new Fiber instance
+	app := fiber.New()
+	// Listen on $PORT for prod or :4000 for dev
+	if prod {
+		app.Listen(":" + port)
 	} else {
-		err := app.Listen(":" + port)
-		if err != nil {
-			return
-		}
+		app.Listen(":4000")
 	}
 }
