@@ -2,6 +2,7 @@ package main
 
 import (
 	"fmt"
+	"github.com/LukeTarr/Tckt/api"
 	"github.com/gofiber/fiber/v2"
 	"os"
 
@@ -41,10 +42,18 @@ func main() {
 
 	// create a new Fiber instance
 	app := fiber.New()
+
+	// attach  handlers from api package
+	auth := app.Group("auth")
+
+	auth.Post("/register", api.HandleRegister)
+	auth.Post("/login", api.HandleLogin)
+
 	// Listen on $PORT for prod or :4000 for dev
 	if prod {
 		app.Listen(":" + port)
 	} else {
 		app.Listen(":4000")
 	}
+
 }
