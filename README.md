@@ -1,33 +1,24 @@
-TICKET SUPPORT SYSTEM
+# Tckt
 
-CLIENT IS BUILT IN REACT
+## What is TCKT?
 
-SERVER IS BUILT WITH GOLANG, GORM AND POSTGRESSQL
+- A full-stack web application.
+- An online ticketing system for an IT department.
+- A collaborative project to help the authors become better developers!
 
-PAGES:
-    LANDING PAGE
-    AUTH
-        SIGNIN
-        SIGNUP
-    VIEW ALL TICKETS
-    VIEW SINGLE TICKET
 
-DATABASE SCHEMA:
-    USERS:
-        PRIVELEDGED OR UNPRIVELEDGED
-        EMAIL
-        PASSWORD
-        TOKEN
-    TICKETS:
-        CREATOR FOREIGN KEY
-        TITLE
-        TEXT
-        STATUS
-        TIME CREATED
-    COMMENTS:
-        CREATOR FOREIGN KEY
-        TICKET FOREIGN KEY
-        TEXT
-        TIME CREATED
+### Server
 
+- [Go](https://go.dev/)
+- [Go Fiber](https://gofiber.io/)
+- [GORM](https://gorm.io/index.html)
+- [PostgreSQL](https://www.postgresql.org/)
+
+
+- Backend hosted on [Heroku](https://www.heroku.com/home)
+- PostgreSQL database hosted on [Heroku Data](https://www.heroku.com/managed-data-services)
+
+### Client
+- [React](https://reactjs.org/)
+- [Fluent UI](https://developer.microsoft.com/en-us/fluentui#/)
 
