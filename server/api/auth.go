@@ -10,10 +10,10 @@ import (
 
 func HandleRegister(c *fiber.Ctx) error {
 	// Create a Register form instance to hold the body into
-	r := new(Register)
+	r := Register{}
 
 	// Populate the instance with data from the body
-	err := c.BodyParser(r)
+	err := c.BodyParser(&r)
 	if err != nil {
 		return err
 	}
@@ -56,10 +56,10 @@ func HandleRegister(c *fiber.Ctx) error {
 }
 
 func HandleLogin(c *fiber.Ctx) error {
-	l := new(Login)
+	l := Login{}
 
 	// Parse the input into a Login instance
-	err := c.BodyParser(l)
+	err := c.BodyParser(&l)
 	if err != nil {
 		return err
 	}

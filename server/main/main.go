@@ -3,6 +3,7 @@ package main
 import (
 	"github.com/LukeTarr/Tckt/api"
 	"github.com/gofiber/fiber/v2"
+	"github.com/gofiber/fiber/v2/middleware/cors"
 	"os"
 )
 
@@ -17,6 +18,10 @@ func main() {
 
 	// create a new Fiber instance
 	app := fiber.New()
+
+	app.Use(cors.New(cors.Config{
+		AllowOrigins: "*",
+	}))
 
 	// attach  handlers from api package
 	auth := app.Group("auth")
